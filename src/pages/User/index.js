@@ -2,10 +2,11 @@ import React from 'react';
 
 import { Container } from '../../styles/GlobalStyles';
 
-export default function Home() {
+export default function User() {
+
   return (
     <Container>
-      <h1>Home page</h1>
+      <h1>Página de um Usuário</h1>
     </Container>
   );
 }
