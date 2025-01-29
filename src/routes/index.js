@@ -15,7 +15,7 @@ export default function Rotas() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route element={<MyRoute/>}>
-        <Route path='/users/:id' element={<User/>} />
+        <Route path='/users/:id/edit' element={<User/>} />
         <Route path='/users' element={<Users/>} />
         <Route path='/users/register' element={<UserRegister/>} />
         <Route path='/fotos' element={<Fotos/>} />

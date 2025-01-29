@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { get } from 'lodash';
-import { FaUserCircle } from 'react-icons/fa'
+import { FaUserCircle, FaEdit, FaWindowClose } from 'react-icons/fa'
 
 import { Container } from '../../styles/GlobalStyles';
 import { UserContainer, ProfilePicture } from './styled';
@@ -19,7 +20,7 @@ export default function Users() {
 
   return (
     <Container>
-      <h1>Página de Usuários</h1>
+      <h1>Cadastro de Usuários</h1>
 
       <UserContainer>
         {users.map(user => (
@@ -31,11 +32,15 @@ export default function Users() {
                 <FaUserCircle size={36} />
               )}
             </ProfilePicture>
+
+            <span>{user.name}</span>
+            <span>{user.email}</span>
+
+            <Link to="users/${user.id}/edit"><FaEdit size={16} /></Link>
+            <Link to="users/${user.id}/delete"><FaWindowClose size={16} /></Link>
           </div>
         ))}
       </UserContainer>
-
-      {users.map(user => user.name)}
     </Container>
   );
 }
