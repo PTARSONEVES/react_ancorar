@@ -12,7 +12,7 @@ export default createGlobalStyle`
 
   body {
     font-family: sans-serif;
-    background: ${colors.dark.background};
+    background: blue;
     color: ${colors.dark.color};
   }
   html, body, #root {
@@ -48,7 +48,7 @@ export default createGlobalStyle`
 `;
 
 export const Container = styled.section`
-  max-width: 360px;
+  max-width: 400px;
   background: ${colors.dark.navbar};
   margin: 30px auto;
   padding: 30px;

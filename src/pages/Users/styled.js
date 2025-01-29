@@ -1,17 +1,6 @@
 import styled from 'styled-components';
 
-export const Title = styled.h1`
-  color: blue;
+export const UserContainer = styled.div``;
 
-  small {
-    font-size: 12pt;
-    margin-left: 15px;
-    color: red;
-  }
-`;
+export const ProfilePicture = styled.div``;
 
-export const Paragrafo = styled.p`
-  font-size: 20pt;
-  margin-left: 20px;
-  color: orange;
-`;
