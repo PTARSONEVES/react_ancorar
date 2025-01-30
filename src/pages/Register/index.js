@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { isEmail } from 'validator';
 import { get } from 'lodash';
@@ -6,7 +7,6 @@ import { get } from 'lodash';
 import { Container } from '../../styles/GlobalStyles';
 import { Form } from './styled';
 import axios from '../../services/axios';
-import history from '../../services/history';
 
 export default function Register() {
   const [name, setName] = useState('');
@@ -15,6 +15,7 @@ export default function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const usertypeid = 4;
+  const history = useNavigate();
 
     async function handleSubmit(e) {
     e.preventDefault();
@@ -57,7 +58,7 @@ export default function Register() {
         usertypeid
       });
       toast.success('Seu cadastro foi realizado');
-      history.push('/login');
+      history('/login');
 
     } catch(err) {
 //      const status = get(e, 'response.status', 0);
