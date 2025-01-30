@@ -21,12 +21,16 @@ export default createGlobalStyle`
 
   button {
     cursor: pointer;
-    background: ${colors.dark.background};
+    background: ${colors.dark.backgroundButton};
     border: none;
     color: ${colors.dark.color};
     padding: 10px 20px;
     border-radius: 4px;
     font-weight: 700;
+  }
+
+  button:hover {
+    filter: brightness(85%);
   }
 
   a {

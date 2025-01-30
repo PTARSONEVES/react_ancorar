@@ -17,6 +17,9 @@ export default function Header() {
       <Link to="/Users">
         <FaUserAlt size={24} />
       </Link>
+      <Link to="/Register">
+        <FaUserAlt size={24} />
+      </Link>
       <Link to="/outro">
         <FaSignInAlt size={24} />
       </Link>
