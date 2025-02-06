@@ -1,7 +1,7 @@
 import React from 'react';
 import { toast } from 'react-toastify';
 import { isEmail } from 'validator';
-import { useDispatch } from 'react-redux';0
+import { useDispatch } from 'react-redux';
 import { get } from 'lodash';
 
 import { Form } from './styled';
@@ -12,6 +12,7 @@ export default function Login(props) {
   const dispatch = useDispatch();
 
   const prevPath = get(props, 'location.state.prevPath', '/');
+  console.log('prevPath :>',prevPath);
 
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');

@@ -6,6 +6,6 @@ export default function  MyRoute() {
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
 
   return (
-    isLoggedIn.token ? <Outlet/> : <Navigate to='/login'/>
+    isLoggedIn ? <Outlet/> : <Navigate to='/login'/>
   );
 }
