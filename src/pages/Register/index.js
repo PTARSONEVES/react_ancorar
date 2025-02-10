@@ -7,6 +7,7 @@ import { get } from 'lodash';
 import { Container } from '../../styles/GlobalStyles';
 import { Form } from './styled';
 import axios from '../../services/axios';
+import Loading from '../../components/Loading';
 
 export default function Register() {
   const [name, setName] = useState('');
@@ -14,6 +15,7 @@ export default function Register() {
   const [alias, setAlias] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoading, setIsLoadind] = useState(false);
   const usertypeid = 4;
   const history = useNavigate();
 
@@ -48,6 +50,8 @@ export default function Register() {
 
     if(formErrors) return;
 
+    setIsLoadind(true);
+
     try {
       await axios.post('/users/', {
         name,
@@ -58,6 +62,8 @@ export default function Register() {
         usertypeid
       });
       toast.success('Seu cadastro foi realizado');
+      setIsLoadind(false);
+
       history('/login');
 
     } catch(err) {
@@ -65,12 +71,14 @@ export default function Register() {
       const errors = get(err, 'response.data.errors',[]);
 
       errors.map(error => toast.error(error));
+      setIsLoadind(false);
     }
 
   }
 
   return (
     <Container>
+      <Loading isLoading={isLoading}/>
       <h1>Registro de Usuários</h1>
 
       <Form onSubmit={handleSubmit}>

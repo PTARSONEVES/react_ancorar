@@ -7,12 +7,18 @@ import { Container } from '../../styles/GlobalStyles';
 import { UserContainer, ProfilePicture } from './styled';
 import axios from '../../services/axios';
 
+import Loading from '../../components/Loading';
+
 export default function Users() {
   const [users, setUsers] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     async function getData() {
+      setIsLoading(true);
       const response = await axios.get('/users');
       setUsers(response.data);
+      setIsLoading(false);
     }
 
     getData();
@@ -20,6 +26,8 @@ export default function Users() {
 
   return (
     <Container>
+      <Loading isLoading={isLoading} />
+
       <h1>Cadastro de Usuários</h1>
 
       <UserContainer>
