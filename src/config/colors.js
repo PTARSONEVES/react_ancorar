@@ -2,7 +2,9 @@ export const dark = {
     'background' : '#0D0D29',
     'color' : '#E67300',
     'navbar' : '#0D0D29',
-    'backgroundButton' : '#5c5c8a'
+    'backgroundButton' : '#5c5c8a',
+    'loggedIn': '#00cc00',
+    'loggedOut': '#c00'
 };
 
 export const primaryColor = '#0D0D0D';
