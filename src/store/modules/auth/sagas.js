@@ -34,6 +34,7 @@ function* registerRequest({ payload }) {
 
   try {
     if(id) {
+      console.log(payload);
       yield call(axios.put, '/users', {
         email,
         name,
@@ -42,9 +43,10 @@ function* registerRequest({ payload }) {
         password: password || undefined,
         usertypeid,
       });
+      console.log('também');
       toast.success('(FRONT) Usuário alterado com sucesso!');
       yield put(actions.registerUpdatedSuccess({ name, lastname, alias, email, password, usertypeid }));
-    } else {
+      } else {
       yield call(axios.post, '/users', {
         email,
         name,
@@ -54,7 +56,7 @@ function* registerRequest({ payload }) {
         usertypeid,
       });
       toast.success('(FRONT) Usuário criado com sucesso!');
-      yield put(actions.registerCreatedSuccess({ name, email, password })); //envio de dados não obrigatório
+      yield put(actions.registerCreatedSuccess()); //envio de dados não obrigatório
     }
   } catch(e) {
     const errors = get(e, 'response.data.errors', []);
