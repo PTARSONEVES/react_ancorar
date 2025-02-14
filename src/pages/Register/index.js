@@ -1,21 +1,22 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { isEmail } from 'validator';
-import { get } from 'lodash';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { Container } from '../../styles/GlobalStyles';
 import { Form } from './styled';
-import axios from '../../services/axios';
 import Loading from '../../components/Loading';
 import * as actions from '../../store/modules/auth/actions';
 
 export default function Register() {
+
   const dispatch = useDispatch();
   const id = useSelector(state => state.auth.user.id);
   const nameStored = useSelector(state => state.auth.user.name);
+  const lastnameStored = useSelector(state => state.auth.user.lastname);
+  const aliasStored = useSelector(state => state.auth.user.alias);
   const emailStored = useSelector(state => state.auth.user.email);
+  const usertypeidStored = useSelector(state => state.auth.user.usertypeid);
   const isLoading = useSelector(state => state.auth.isLoading);
 
   const [name, setName] = useState('');
@@ -23,70 +24,52 @@ export default function Register() {
   const [alias, setAlias] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const usertypeid = 4;
-  const history = useNavigate();
+  const [usertypeid, setUsertypeid] = useState('4');
 
   React.useEffect(() => {
     if(!id) return;
 
     setName(nameStored);
+    setLastname(lastnameStored);
+    setAlias(aliasStored);
+    setUsertypeid(usertypeidStored);
     setEmail(emailStored);
-  }, [emailStored, id, nameStored]);
+  }, [emailStored, id, nameStored, lastnameStored, aliasStored, usertypeidStored]);
 
-    async function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     let formErrors = false;
 
     if(name.length < 3 || name.length >50) {
       formErrors = true;
-      toast.error('Nome deve ter entre 3 e 50 caracteres');
+      toast.error('(FRONT) Nome deve ter entre 3 e 50 caracteres');
     }
 
     if(lastname.length < 3 || lastname.length >50) {
       formErrors = true;
-      toast.error('Sobrenome deve ter entre 3 e 50 caracteres');
+      toast.error('(FRONT) Sobrenome deve ter entre 3 e 50 caracteres');
     }
 
     if(alias.length < 3 || alias.length >50) {
       formErrors = true;
-      toast.error('Apelido deve ter entre 3 e 50 caracteres');
+      toast.error('(FRONT) Apelido deve ter entre 3 e 50 caracteres');
     }
 
     if(!isEmail(email)) {
       formErrors = true;
-      toast.error('E-mail inválido');
+      toast.error('(FRONT) E-mail inválido');
     }
-
-
 
     if(!id && (password.length < 3 || password.length >15)) {
       formErrors = true;
-      toast.error('Senha deve ter entre 3 e 15 caracteres');
+      toast.error('(FRONT) Senha deve ter entre 3 e 15 caracteres');
     }
 
     if(formErrors) return;
 
-    dispatch(actions.registerRequest({ name, email, password, id }));
 
-    try {
-      await axios.post('/users/', {
-        name,
-        lastname,
-        alias,
-        email,
-        password,
-        usertypeid
-      });
-      toast.success('Seu cadastro foi realizado');
 
-      history('/login');
-
-    } catch(err) {
-//      const status = get(e, 'response.status', 0);
-      const errors = get(err, 'response.data.errors',[]);
-
-      errors.map(error => toast.error(error));
-    }
+    dispatch(actions.registerRequest({ name, lastname, alias, email, password, usertypeid, id }));
 
   }
 

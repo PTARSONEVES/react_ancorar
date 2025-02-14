@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Container } from './styled';
 
+/* eslint-disable react/prop-types */ // TODO: upgrade to latest eslint tooling
 export default function Loading({isLoading}) {
   if (!isLoading) return <></>;
   return (
