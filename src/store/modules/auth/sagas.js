@@ -34,8 +34,7 @@ function* registerRequest({ payload }) {
 
   try {
     if(id) {
-      console.log(payload);
-      yield call(axios.put, '/users', {
+      yield call(axios.put, '/users/'+id, {
         email,
         name,
         lastname,
@@ -43,7 +42,6 @@ function* registerRequest({ payload }) {
         password: password || undefined,
         usertypeid,
       });
-      console.log('também');
       toast.success('(FRONT) Usuário alterado com sucesso!');
       yield put(actions.registerUpdatedSuccess({ name, lastname, alias, email, password, usertypeid }));
       } else {
