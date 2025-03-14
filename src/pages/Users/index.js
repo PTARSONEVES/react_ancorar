@@ -4,7 +4,7 @@ import { get } from 'lodash';
 import { FaUserCircle, FaEdit, FaWindowClose, FaExclamation } from 'react-icons/fa'
 
 import { Container } from '../../styles/GlobalStyles';
-import { UserContainer, ProfilePicture } from './styled';
+import { UserContainer, ProfilePicture, Modal } from './styled';
 import axios from '../../services/axios';
 
 import Loading from '../../components/Loading';
@@ -32,7 +32,15 @@ export default function Users() {
     e.currentTarget.remove();
   };
 
-  const hadleDelete = async(e, id, index) => {
+  const handleEditAsk = function(e, user) {
+    e.preventDefault();
+    const id = user.id;
+    const edt = "editando";
+    console.log(edt, id);
+    <Modal></Modal>
+  };
+
+  const handleDelete = async(e, id, index) => {
     e.persist();
     try {
       setIsLoading(true);
@@ -74,7 +82,7 @@ export default function Users() {
             <span>{user.name}</span>
             <span>{user.email}</span>
 
-            <Link to="users/${user.id}/edit">
+            <Link onClick={e => handleEditAsk(e, user)} to="users/${user.id}/edit">
               <FaEdit size={16} />
             </Link>
 
@@ -86,7 +94,7 @@ export default function Users() {
               size={16}
               display="none"
               cursor="pointer"
-              onClick={e => hadleDelete(e, user.id, index)}
+              onClick={e => handleDelete(e, user.id, index)}
             />
 
           </div>
